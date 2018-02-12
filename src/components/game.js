@@ -11,11 +11,22 @@ class Game extends Component {
 		return (
 			<div>
 				<h1>Guessing Game</h1>
-				<p>Random Number: {this.props.ranNum}</p>
-				<input onChange={this.props.userInput} value={this.props.userGuess} type="number" />
-				<p>{this.props.msg}</p>
+				{/* <p>Random Number: {this.props.ranNum}</p> */}
+				<h3>Guess a number from 1-10</h3>
+				<input
+					className="my-4"
+					onChange={this.props.userInput}
+					value={this.props.userGuess}
+					type="number"
+				/>
 				<br />
-				<button onClick={this.props.makeGuess}>Make Guess</button>
+				<button className="btn btn-outline-secondary mr-3" onClick={this.props.makeGuess}>
+					Make Guess
+				</button>
+				<button className="btn btn-outline-success" onClick={this.props.getRandomNumber}>
+					New Game
+				</button>
+				<p className="my-3">{this.props.msg} </p>
 				{/* <button onClick={this.props.getRandomNumber}>Get Random Number</button> */}
 			</div>
 		);

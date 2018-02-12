@@ -4,7 +4,8 @@ const DEFAULT_STATE = {
 	randomNumber: null,
 	userGuess: '',
 	numberOfGuesses: 0,
-	message: ''
+	message: '',
+	win: false
 };
 
 export default function(state = DEFAULT_STATE, action) {
@@ -12,9 +13,23 @@ export default function(state = DEFAULT_STATE, action) {
 		case types.GET_RANDOM_NUMBER:
 			return {
 				...state,
-				randomNumber: action.payload
+				randomNumber: action.payload,
+				userGuess: '',
+				numberOfGuesses: 0,
+				message: '',
+				win: false
 			};
 		case types.USER_INPUT:
+			if (state.win === true) {
+				message = 'Start a New Game';
+
+				return {
+					...state,
+					userGuess: '',
+					message
+				};
+			}
+
 			return {
 				...state,
 				userGuess: action.payload
@@ -22,10 +37,28 @@ export default function(state = DEFAULT_STATE, action) {
 		case types.MAKE_GUESS:
 			let message = 'You Got It!';
 
+			if (state.win === true) {
+				message = 'Start a New Game';
+
+				return {
+					...state,
+					userGuess: '',
+					message
+				};
+			}
+
 			if (state.randomNumber > state.userGuess) {
 				message = 'Too Low!';
 			} else if (state.randomNumber < state.userGuess) {
 				message = 'Too High!';
+			} else {
+				return {
+					...state,
+					userGuess: '',
+					message,
+					numberOfGuesses: state.numberOfGuesses + 1,
+					win: true
+				};
 			}
 
 			return {

@@ -1,10 +1,9 @@
 import React from 'react';
 import Game from './game';
-import '../assets/css/app.css';
 
 const App = () => (
 	<div>
-		<div className="app">
+		<div className="container text-center">
 			<Game />
 		</div>
 	</div>
